@@ -1,0 +1,49 @@
+{
+  // SpeedDial11 · Manifest V3. Brave acepta comentarios en este archivo aunque el JSON
+  // estándar no los permita: si tu editor los marca en rojo, es solo por eso.
+  "manifest_version": 3,
+  "name": "SpeedDial11",
+  "version": "0.6.0",
+  "description": "Funciones de Opera para Brave: Speed Dial con carpetas, stickers para identificar pestañas y cambio de pestañas por uso reciente.",
+  "icons": { "16": "icons/icon16.png", "32": "icons/icon32.png", "48": "icons/icon48.png", "128": "icons/icon128.png" },
+
+  // Speed Dial: reemplaza la página de nueva pestaña.
+  "chrome_url_overrides": { "newtab": "newtab/newtab.html" },
+
+  // Proceso de fondo: Brave lo despierta cuando hay algo que hacer y lo duerme a los ~30 s.
+  "background": { "service_worker": "background.js", "type": "module" },
+
+  // El ícono de la barra abre el menú de stickers.
+  "action": {
+    "default_title": "Sticker de pestaña",
+    "default_popup": "stickers/popup.html",
+    "default_icon": { "16": "icons/icon16.png", "32": "icons/icon32.png" }
+  },
+
+  // Ajustes: clic derecho en el ícono → Opciones.
+  "options_ui": { "page": "options/options.html", "open_in_tab": false },
+
+  // Atajos sugeridos; se cambian en brave://extensions/shortcuts.
+  // Ctrl+Tab no se puede reasignar desde una extensión: por eso Alt+Q.
+  "commands": {
+    "_execute_action": { "suggested_key": { "default": "Alt+S" }, "description": "Elegir sticker para la pestaña actual" },
+    "mru-next": { "suggested_key": { "default": "Alt+Q" }, "description": "Ir a la pestaña usada antes (mantén Alt y repite Q para ir más atrás)" },
+    "mru-prev": { "suggested_key": { "default": "Alt+Shift+Q" }, "description": "Recorrer las pestañas recientes al revés" }
+  },
+
+  "permissions": [
+    "bookmarks",      // tus sitios y carpetas son la carpeta «SpeedDial» de tus marcadores
+    "storage",        // diseño, stickers y ajustes
+    "favicon",        // íconos de los sitios desde la caché de Brave (sin internet)
+    "search",         // el buscador usa tu motor de búsqueda predeterminado
+    "tabGroups",      // «Abrir todo en un grupo» (clic derecho en una carpeta)
+    "scripting",      // meter código solo en la pestaña que lo necesita, cuando lo necesita
+    "contextMenus",   // «Sticker de pestaña» en el clic derecho
+    "webNavigation",  // volver a poner el sticker apenas la pestaña carga otra página
+    "tabs"            // títulos y direcciones de las pestañas para la lista de Alt+Q
+  ],
+
+  // Para cambiar título e ícono de las páginas con sticker y mostrar la lista de pestañas
+  // encima de la página. Brave lo advierte como «leer y cambiar tus datos en todos los sitios».
+  "host_permissions": ["<all_urls>"]
+}

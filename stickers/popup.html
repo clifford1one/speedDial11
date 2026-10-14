@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Sticker de pestaña</title>
+<link rel="stylesheet" href="popup.css">
+<script type="module" src="popup.js"></script>
+</head>
+<body>
+  <header>
+    <span id="current" class="current" title="Sticker actual"></span>
+    <div class="who"><strong>Sticker de pestaña</strong><span id="tab-title"></span></div>
+    <button id="clear" class="btn" type="button" title="Quitar (tecla 0)">Quitar</button>
+  </header>
+
+  <p id="note" class="note" hidden></p>
+
+  <section id="recent-box" hidden>
+    <h2>Recientes</h2>
+    <div id="recent" class="emojis"></div>
+  </section>
+
+  <section>
+    <h2>Elegir</h2>
+    <div id="grid" class="emojis"></div>
+  </section>
+
+  <form id="custom" autocomplete="off">
+    <input id="custom-text" maxlength="16" placeholder="Otro emoji o 1–2 letras" aria-label="Sticker personalizado">
+    <button class="btn" type="submit">Usar</button>
+  </form>
+
+  <footer><span id="hint"></span><button id="options" class="link" type="button">Ajustes</button></footer>
+</body>
+</html>

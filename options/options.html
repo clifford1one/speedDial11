@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>SpeedDial11 · Ajustes</title>
+<link rel="stylesheet" href="options.css">
+<script type="module" src="options.js"></script>
+</head>
+<body>
+<main>
+  <h1>SpeedDial11</h1>
+
+  <section>
+    <h2>Cambiar de pestaña</h2>
+    <label class="row">
+      <span>Modo<small>Con lista: mantén Alt y toca Q para ir más atrás; al soltar Alt cambias. Rápido: cada toque cambia al instante, sin lista.</small></span>
+      <select id="mode">
+        <option value="overlay">Con lista</option>
+        <option value="rapido">Rápido</option>
+      </select>
+    </label>
+    <label class="row">
+      <span>Qué pestañas<small>Cuáles entran al recorrido</small></span>
+      <select id="scope">
+        <option value="window">Solo esta ventana</option>
+        <option value="all">Todas las ventanas</option>
+      </select>
+    </label>
+    <div class="row">
+      <span>Atajos<small id="shortcuts"></small></span>
+      <button id="edit-shortcuts" class="btn" type="button">Cambiar atajos…</button>
+    </div>
+  </section>
+
+  <section>
+    <h2>Stickers</h2>
+    <p class="hint">Para ponerle uno a una pestaña: pulsa el ícono de la extensión en la barra (o Alt+S), o haz clic derecho en la página → «Sticker de pestaña».</p>
+    <label class="row"><span>Mostrar en el título</span><input type="checkbox" id="stickerTitle"></label>
+    <label class="row">
+      <span>En el ícono</span>
+      <select id="stickerIcon">
+        <option value="badge">Encima del favicon</option>
+        <option value="replace">Reemplaza al favicon</option>
+        <option value="off">No tocar el ícono</option>
+      </select>
+    </label>
+  </section>
+
+  <p class="hint">El diseño del Speed Dial se cambia desde la nueva pestaña (botón de ajustes, arriba a la derecha). Los cambios de esta página se guardan solos.</p>
+</main>
+</body>
+</html>

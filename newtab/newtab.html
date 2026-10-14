@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Nueva pestaña</title>
+<link rel="stylesheet" href="newtab.css">
+<!-- boot.js aplica tus colores guardados ANTES del primer pintado (evita un parpadeo). -->
+<script src="boot.js"></script>
+<script type="module" src="main.js"></script>
+<!-- Lista de cambio de pestañas (Alt+Q): en las páginas web se inyecta; aquí se carga directo. -->
+<script src="../tabs/overlay.js" defer></script>
+</head>
+<body>
+<div id="bg" aria-hidden="true"></div>
+
+<main id="app">
+  <header id="top">
+    <div id="clock"><span id="time"></span><span id="date"></span></div>
+    <p id="greeting"></p>
+    <form id="search" role="search">
+      <input id="q" type="search" placeholder="Buscar" autocomplete="off" spellcheck="false" aria-label="Buscar">
+    </form>
+  </header>
+  <section id="grid" class="grid" aria-label="Speed Dial"></section>
+</main>
+
+<button id="settings-btn" class="corner-btn" type="button" title="Personalizar" aria-label="Personalizar">
+  <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+    <path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="1.5"/>
+    <rect x="14" y="3.5" width="5" height="5" fill="currentColor"/>
+    <rect x="5" y="9.5" width="5" height="5" fill="currentColor"/>
+    <rect x="11" y="15.5" width="5" height="5" fill="currentColor"/>
+  </svg>
+</button>
+
+<!-- Panel de una carpeta abierta -->
+<div id="folder-view" class="overlay" inert>
+  <div class="panel" role="dialog" aria-modal="true" aria-label="Carpeta">
+    <div class="panel-head">
+      <input id="folder-title" maxlength="200" spellcheck="false" aria-label="Nombre de la carpeta" title="Clic para renombrar">
+      <button class="icon-btn" type="button" data-action="close-folder" title="Cerrar (Esc)" aria-label="Cerrar">
+        <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19" stroke="currentColor" stroke-width="1.6"/></svg>
+      </button>
+    </div>
+    <div id="folder-grid" class="grid" aria-label="Sitios de la carpeta"></div>
+  </div>
+</div>
+
+<!-- Panel de personalización (se llena la primera vez que lo abres) -->
+<aside id="settings" class="drawer" inert aria-label="Personalizar">
+  <div class="drawer-head">
+    <h2>Personalizar</h2>
+    <button class="icon-btn" type="button" data-action="close-settings" title="Cerrar (Esc)" aria-label="Cerrar">
+      <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19" stroke="currentColor" stroke-width="1.6"/></svg>
+    </button>
+  </div>
+  <div id="settings-body"></div>
+</aside>
+
+<div id="menu" class="menu" role="menu" hidden></div>
+
+<dialog id="editor">
+  <form id="editor-form" method="dialog">
+    <h2 id="editor-title">Agregar sitio</h2>
+    <label class="field"><span>Nombre</span><input name="label" maxlength="200" placeholder="(opcional)"></label>
+    <label class="field site-only"><span>Dirección</span><input name="url" placeholder="ejemplo.com" spellcheck="false"></label>
+    <label class="field site-only"><span>Carpeta</span><select name="parent"></select></label>
+    <label class="field site-only"><span>Ícono</span>
+      <select name="iconType">
+        <option value="">Automático</option>
+        <option value="letter">Inicial</option>
+        <option value="text">Emoji o texto</option>
+        <option value="url">Imagen desde internet</option>
+        <option value="file">Imagen desde archivo</option>
+      </select>
+    </label>
+    <label class="field icon-opt" data-for="text"><span>Emoji o texto</span><input name="iconText" maxlength="12"></label>
+    <label class="field icon-opt" data-for="url"><span>URL de la imagen</span><input name="iconUrl" type="url" placeholder="https://…" spellcheck="false"></label>
+    <label class="field icon-opt" data-for="file"><span>Archivo</span><input name="iconFile" type="file" accept="image/*"></label>
+    <div class="field"><span>Color propio</span><span class="inline"><input type="checkbox" name="bgOn" aria-label="Usar color propio"><input type="color" name="bg" aria-label="Color de la tarjeta"></span></div>
+    <!-- "Guardar" va primero en el HTML para que Enter lo active; el CSS lo muestra a la derecha. -->
+    <div class="actions">
+      <button class="btn primary" value="ok">Guardar</button>
+      <button class="btn" type="button" data-action="cancel-editor">Cancelar</button>
+    </div>
+  </form>
+</dialog>
+
+<div id="toast" class="toast" role="status" hidden><span class="msg"></span><button class="btn" type="button"></button></div>
+</body>
+</html>
